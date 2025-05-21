@@ -27,12 +27,14 @@ jobs:
          uses: jfrog/setup-jfrog-cli@v3
          env:  
            JF_URL: ${{ secrets.JF_URL }}
+           JFROG_CLI_OIDC_SKIP_VERIFY: true
          with:
            oidc-provider-name: ${{ env.OIDC_PROVIDER }}
            oidc-audience: ${{ env.OIDC_AUDIENCE }}
 
        - name: Set CLI Config
          run: jf npm-config --global=true --repo-resolve=$PLATFORM_REPO --repo-deploy=$PLATFORM_REPO
+         
            
        - name: Install Dependencies
          run: jf npm install
